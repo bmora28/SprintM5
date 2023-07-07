@@ -37,22 +37,15 @@ CREATE TABLE `productos` (
   CONSTRAINT `idproveedores` FOREIGN KEY (`Proveedor`) REFERENCES `proveedores` (`idproveedores`)
 );
 CREATE TABLE `compra` (
-  `idcompra` INT NOT NULL,
-  `Id_Cliente` INT NULL,
-  `Id_Producto` INT NULL,
+  `idcompra` int NOT NULL,
+  `Id_Cliente` int DEFAULT NULL,
+  `Id_Producto` int DEFAULT NULL,
   PRIMARY KEY (`idcompra`),
-  INDEX `clientecompra_idx` (`Id_Cliente` ASC) VISIBLE,
-  INDEX `productocompra_idx` (`Id_Producto` ASC) VISIBLE,
-  CONSTRAINT `clientecompra`
-    FOREIGN KEY (`Id_Cliente`)
-    REFERENCES `sm5`.`cliente` (`idcliente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `productocompra`
-    FOREIGN KEY (`Id_Producto`)
-    REFERENCES `sm5`.`productos` (`idproductos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  KEY `clientecompra_idx` (`Id_Cliente`),
+  KEY `productocompra_idx` (`Id_Producto`),
+  CONSTRAINT `clientecompra` FOREIGN KEY (`Id_Cliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `productocompra` FOREIGN KEY (`Id_Producto`) REFERENCES `productos` (`idproductos`)
+);
 
   -- Llenando las tablas de datos
 INSERT INTO categorias (idcategorias, Nombre_Categoria) VALUES (1, 'Electronica y Computacion'),
