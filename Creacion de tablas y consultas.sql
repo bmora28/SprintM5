@@ -77,22 +77,22 @@ INSERT INTO productos (idproductos, Stock, precio, color, Categoria_producto, Pr
 (10, 3, 2000, 'Amarillo', 4, 2);
 
 -- Cuál es la categoría de productos que más se repite.
-select Nombre_Categoria, Categoria_producto, count(*) from sm5.productos
-inner join sm5.categorias
-on sm5.categorias.idcategorias = sm5.productos.Categoria_producto
+select Nombre_Categoria, Categoria_producto, count(*) from productos
+inner join categorias
+on categorias.idcategorias = productos.Categoria_producto
 group by Categoria_producto ;
 
 -- Cuáles son los productos con mayor stock
-select idproductos, Stock  from sm5.productos
-where Stock = (select max(Stock) from sm5.productos);
+select idproductos, Stock  from productos
+where Stock = (select max(Stock) from productos);
 
  -- Qué color de producto es más común en nuestra tienda.
- select count(*), color  from sm5.productos
+ select count(*), color  from productos
  group by color limit 1;
  
 -- Cual o cuales son los proveedores con menor stock de productos.
 
-select SUM(Stock) AS TOTAL,Proveedor  from sm5.productos
+select SUM(Stock) AS TOTAL,Proveedor  from productos
 group by Proveedor
 ORDER BY TOTAL ASC;
 
